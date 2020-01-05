@@ -236,3 +236,19 @@ footer h1 span {
 .o-block-right {
   float:right;
 }
+
+
+
+/* Code Page */
+.code-page .header {
+
+}
+
+.code-page .title {
+    color: #f93700;
+    display: inline-block;
+    margin-inline-end: 18px;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}

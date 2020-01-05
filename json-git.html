@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RedFox Studio</title>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500%7CRoboto:400,500%7C&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese&display=swap" rel="stylesheet">
+  
+
+  <!-- Code Highlighting -->
+  <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/kimbie.light.css">
+  <script src="highlight.pack.js"></script>
+  <style>
+    pre { 
+        white-space: pre-wrap; 
+        word-break: break-word;
+    }
+    .hljs { 
+        background:#fff1df;
+    }
+  </style>
+</head>
+<body>
+	<!-- Navbar (sit on top) -->
+	<div class="w3-top">
+		<div class="w3-bar w3-display-container w3-content">
+			<a class="w3-bar-item w3-button" href="#home">RedFox Studio.</a> <!-- Right-sided navbar links. Hide them on small screens -->
+			<div class="w3-right w3-hide-small">
+				<a class="w3-bar-item w3-button" href="#about"></a> <a class="w3-bar-item w3-button" href="#menu"></a> <a class="w3-bar-item w3-button" href="">Site Under construction</a>
+			</div>
+		</div>
+	</div><!-- Header -->
+	<div class="w3-display-container w3-content w3-page code-page">
+
+    <div style="text-align: center;">
+        <div style="font-family: monospace;white-space: pre;font-size: 12px;">
+   ___          ___           ___           ___     
+  /  /\        /  /\         /  /\         /__/\    
+ /  /:/       /  /:/_       /  /::\        \  \:\   
+/__/::\      /  /:/ /\     /  /:/\:\        \  \:\  
+\__\/\:\    /  /:/ /::\   /  /:/  \:\   _____\__\:\ 
+   \  \:\  /__/:/ /:/\:\ /__/:/ \__\:\ /__/::::::::\
+    \__\:\ \  \:\/:/~/:/ \  \:\ /  /:/ \  \:\~~\~~\/
+    /  /:/  \  \::/ /:/   \  \:\  /:/   \  \:\  ~~~ 
+   /__/:/    \__\/ /:/     \  \:\/:/     \  \:\     
+   \__\/       /__/:/       \  \::/       \  \:\    
+               \__\/         \__\/         \__\/    
+        </div>
+        <br>
+        <span>Kotlin Implementation of JSON Parser. Lightweight weight and fast library. Platform independant (Multiplatform).</span>
+    </div>
+    <br><br><br><br><br><br>
+
+
+
+    <span class="title">/* Source Code -------------- */</span>
+    <pre><code class="lang-kt">
+    class JSON(val jsonString: String) {
+
+        fun parse() = when (jsonString[0]) {
+            '{' -&gt; jsonString.parseObject(hashMapOf(), 1).obj
+            '[' -&gt; jsonString.parseArray(mutableListOf(), 1).obj
+            else -&gt; throw Exception("Bad JSON")
+        }
+
+        fun String.parseObject(output: HashMap&lt;String, Any?&gt;, from: Int, all: Boolean = true /* Add Siblings */): Value {
+
+            var currentPos = from
+
+            nextIteration(currentPos).let {
+                if (it.char != '"') throw Exception("Object key parse error bad JSON")
+                else currentPos = it.pos+1
+            }
+
+            val key = nextIteration(currentPos).let {
+                extractValue(it.pos).apply {
+                    currentPos = pos+1
+                }.obj
+            }  as String// ?: throw Exception("Erro key should not be null")
+
+
+            /** For Value**/
+            nextIteration(currentPos).let {
+                if (it.char != ':') throw Exception("Object value parse error bad JSON")
+                else currentPos = it.pos+1
+            }
+
+            nextIteration(currentPos).let {
+                when (it.char) {
+                    '{' -&gt; parseObject(hashMapOf(), it.pos+1).let {
+                        output[key] = it.obj
+                        currentPos = it.pos+1
+                    }
+
+                    '[' -&gt; parseArray(mutableListOf(), it.pos+1).let {
+                        output[key] = it.obj
+                        currentPos = it.pos+1
+                    }
+
+                    '"' -&gt; extractValue(it.pos+1).let {
+                        output[key] = it.obj
+                        currentPos = it.pos+1
+                    }
+
+                    't' -&gt; {
+                        output[key] = true
+                        currentPos += 4
+                    }
+
+                    'f' -&gt; {
+                        output[key] = false
+                        currentPos += 5
+                    }
+
+                    'n' -&gt; {
+                        output[key] = null
+                        currentPos += 4
+                    }
+
+                    else -&gt; extractValue(it.pos).let { str -&gt;
+                        output[key] = (str.obj as String).let {
+                            when {
+                                it.contains('.') -&gt; it.toDouble() as Any
+                                it.contains('-') -&gt; it.toInt() as Any
+                                else -&gt; it.toLong() as Any
+                            }
+                        }
+                        currentPos = str.pos
+                    }
+                }
+            }
+
+            nextIteration(currentPos).let {
+                if (it.char == ',' && nextIteration(it.pos+1).char == '"' && all) {
+                    parseObject(output, it.pos+1).let {
+                        currentPos = it.pos+1
+                    }
+                }
+            }
+
+            return Value(nextIteration(currentPos).pos, output)
+        }
+
+
+        fun String.parseArray(output: MutableList&lt;Any&gt;, from: Int): Value {
+            var currentPos = from
+
+            nextIteration(currentPos).let {
+                if (it.char != '{') throw Exception("Error in Array Parse")
+                else currentPos = it.pos+1
+            }
+
+            parseObject(hashMapOf(), currentPos).let {
+                output.add(it.obj)
+                currentPos = it.pos
+            }
+
+            nextIteration(currentPos).let {
+                if(it.char == ',') parseArray(output, currentPos+1).let {
+                    currentPos = it.pos
+                }
+            }
+
+            return Value(nextIteration(currentPos).pos, output)
+
+        }
+
+        fun getObject(key: String): Any? {
+            val index = jsonString.indexOf(key)
+            val currentPos = index+key.length+2
+
+            return when (jsonString.get(currentPos)) {
+                '{' -&gt; jsonString.parseObject(hashMapOf(), currentPos+1).obj
+                '[' -&gt; jsonString.parseArray(mutableListOf(), currentPos+1).obj
+                '"' -&gt; jsonString.extractValue(currentPos+1).obj
+                't' -&gt; true
+                'f' -&gt; false
+                'n' -&gt; null
+                else -&gt; (jsonString.extractValue(currentPos).obj as String).let {
+                    when {
+                        it.contains('.') -&gt; it.toDouble() as Any
+                        it.contains('-') -&gt; it.toInt() as Any
+                        else -&gt; it.toLong() as Any
+                    }
+                }
+            }
+        }
+
+
+        fun String.nextIteration(from: Int) : Iteration =
+            when (val char = get(from)) {
+            '\n' -&gt; nextIteration(from+1)
+            ' ' -&gt; nextIteration(from+1)
+            '\t' -&gt; nextIteration(from+1)
+            '\r' -&gt; nextIteration(from+1)
+            else -&gt; Iteration(from, char)
+        }
+
+        fun String.extractValue(from: Int): ExtractedString {
+            var value = ""
+            var i = from
+            do {
+                if (get(i).isSpecialChar()) break
+                else {
+                    value += get(i)
+                    i++
+                }
+            } while (i &lt; length)
+
+            return ExtractedString(i, value)
+        }
+
+
+        fun Char.isSpecialChar() =
+            (this == '"' || this == '{' || this == '}' || this == '[' || this == '[' || this == ']' || this == ',' || this == ':')
+
+        class Iteration(var pos: Int = 0, var char: Char)
+        class Value(var pos: Int = 0, var obj: Any)
+        class ExtractedString(var pos: Int = 0, var obj: Any?)
+
+    }
+
+
+    fun List&lt;*&gt;.toJSONString(): String {
+        var str = "["
+        var i = 0
+        forEach { ele -&gt;
+            if (ele is HashMap&lt;*, *&gt;) str += ele.toJSONString()
+
+            if (i&lt;size-1) str += ","
+            i++
+        }
+        str += "]"
+        return str
+    }
+
+
+    fun HashMap&lt;*, *&gt;.toJSONString(): String {
+        var str = "{"
+        var i = 0
+        forEach {
+            val key = it.key
+            val value = it.value
+            str += "\"${key}\":${ when (value) {
+                is List&lt;*&gt; -&gt; value.toJSONString()
+                is HashMap&lt;*,*&gt; -&gt; value.toJSONString()
+                is String -&gt; "\"$value\""
+                else -&gt; value
+            }}"
+
+            if (i&lt;size-1) str += ","
+            i++
+        }
+        str += "}"
+        return str
+    }
+    </code></pre>
+    
+
+
+
+	<!-- Footer -->
+	<footer class="w3-padding-32">
+            <p style="font-family: monospace; font-size:16px;text-align: center; padding-top:50px;">Made with <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/146/heavy-black-heart_2764.png" width="20" height="20" align="top"> By Kavan Mevada</p>
+    </footer>
+
+    </div>
+    
+
+  
+
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
