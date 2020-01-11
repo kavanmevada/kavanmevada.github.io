@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RedFox Studio</title>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+  <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500%7CRoboto:400,500%7C&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese&display=swap" rel="stylesheet">
+  
+
+  <!-- Code Highlighting -->
+  <link rel="stylesheet" href="https://highlightjs.org/static/demo/styles/kimbie.light.css">
+  <script src="highlight.pack.js"></script>
+  <style>
+    pre { 
+        white-space: pre-wrap; 
+        word-break: break-word;
+    }
+    .hljs { 
+        background:#fff1df;
+    }
+  </style>
+</head>
+<body>
+	<!-- Navbar (sit on top) -->
+	<div class="w3-top">
+		<div class="w3-bar w3-display-container w3-content">
+			<a class="w3-bar-item w3-button" href="#home">RedFox Studio.</a> <!-- Right-sided navbar links. Hide them on small screens -->
+			<div class="w3-right w3-hide-small">
+				<a class="w3-bar-item w3-button" href="#about"></a> <a class="w3-bar-item w3-button" href="#menu"></a> <a class="w3-bar-item w3-button" href="">Site Under construction</a>
+			</div>
+		</div>
+	</div><!-- Header -->
+	<div class="w3-display-container w3-content w3-page code-page">
+
+    <div style="text-align: center;">
+        <br>
+        <h1>Kotlin WorkerPool</h1>
+        <span>Implementation of missing pool for worker</span>
+        <br>
+    </div>
+    <br><br><br><br>
+
+    <span class="title">/* Usage -------------- */</span>
+    <pre><code class="lang-kt">
+    val pool = WorkerPool(3 /* number of workers */)
+    pool.queue(inputParameter /* pass parameters here */) { it ->
+        println(it)
+    }
+    </code></pre>
+
+
+    <span class="title">/* Source Code -------------- */</span>
+    <pre><code class="lang-kt">
+    class WorkerPool(private val count: Int) {
+
+        private val threadPool = mutableListOf&ltThread&gt()
+    
+        fun &ltT&gt queue(param: T, block: (T) -&gt Unit) {
+    
+            if (threadPool.size &gt= count) {
+    
+                threadPool.filter { it.future.state == FutureState.COMPUTED }.forEach {
+                    it.runnigCount = 0
+                }
+    
+                threadPool.forEach {
+                    if (it.runnigCount == 0) {
+                        it.worker.execute(TransferMode.SAFE, { InputBlock(param, block).freeze() } ) { inputBlock -&gt
+                            inputBlock.job(inputBlock.param)
+                        }
+                        it.runnigCount++
+    
+                        return
+                    }
+                }
+    
+                threadPool.minBy { it.runnigCount }?.apply {
+                    future = worker.execute(TransferMode.SAFE, { InputBlock(param, block).freeze() } ) {
+                        it.job(it.param)
+                    }
+                    runnigCount++
+                }
+            }
+    
+            else Worker.start().let {
+                val pool = Thread(it, it.execute(TransferMode.SAFE, { InputBlock(param, block).freeze() } ) { inputBlock -&gt
+                    inputBlock.job(inputBlock.param)
+                }, 1)
+                threadPool.add(pool)
+            }
+    
+        }
+    
+        data class InputBlock&ltT&gt(val param: T, val job: (T) -&gt Unit)
+        class Thread(var worker: Worker, var future: Future&lt*&gt, var runnigCount: Int = 0)
+    }
+    </code></pre>
+    
+
+
+
+	<!-- Footer -->
+	<footer class="w3-padding-32">
+            <p style="font-family: monospace; font-size:16px;text-align: center; padding-top:50px;">Made with <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/146/heavy-black-heart_2764.png" width="20" height="20" align="top"> By Kavan Mevada</p>
+    </footer>
+
+    </div>
+    
+
+  
+
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
