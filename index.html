@@ -17,6 +17,8 @@
     <style>.hljs { background:antiquewhite; }</style>
 </head>
 <body>
+    
+<span id="cursor-arrow" class="cursor-arrow normal cursor-arrow-bar is-top"></span>
 
 <!--
   <div class="frame-bg">
@@ -155,6 +157,41 @@
             <div class="w3-col m6 w3-center"><p>Copyrights © 2019 Kavan Mevada & Redfox Studio</p></div>
         </div>
     </footer>
+    
+    
+    <script>
+        var svgCursor = document.getElementById('cursor-arrow');
+        window.addEventListener("mousemove", function(e) {
+            svgCursor.setAttribute('style', 'left: ' + e.pageX + 'px; top: ' + (e.pageY-window.scrollY) + 'px');
+        });
+
+        window.addEventListener("mousedown", function(e) {
+            svgCursor.classList.add("down");
+        });
+
+        window.addEventListener("mouseup", function(e) {
+            svgCursor.classList.remove("down");
+        });
+
+        var myNodelist = document.querySelectorAll(".cursor-action");
+        for (var i = 0; i < myNodelist.length; i++) {
+                myNodelist[i].addEventListener("mouseenter", function() {
+
+                    console.log(svgCursor.classList.contains("normal"));
+                    if (svgCursor.classList.contains("normal")) {
+                        svgCursor.classList.remove("normal");
+                        svgCursor.classList.add("action");
+                    }
+                });
+
+                myNodelist[i].addEventListener("mouseleave", function() {
+                    if (svgCursor.classList.contains("action")) {
+                        svgCursor.classList.remove("action");
+                        svgCursor.classList.add("normal");
+                    }
+                });
+        }
+	</script>
 
 </div>
 
