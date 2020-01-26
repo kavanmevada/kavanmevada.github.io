@@ -252,3 +252,82 @@ footer h1 span {
     font-weight: bold;
     letter-spacing: 0.05em;
 }
+
+
+
+		html * { cursor: none; }
+		.cursor-arrow.action {
+			-webkit-animation: bounce 1s linear infinite;
+		}
+
+
+		.cursor-arrow {
+			display: inline-block;
+			height: 20px;
+			position: fixed;
+			pointer-events: none;
+			z-index: 10000;
+			width: 20px;
+			color: red;
+		}
+		.cursor-arrow::after {
+			border-bottom-style: solid;
+			border-bottom-width: 3px;
+			border-right-style: solid;
+			border-right-width: 3px;
+			content: '';
+			display: inline-block;
+			height: 20px;
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 20px;
+		}
+
+		.cursor-arrow::before {
+			bottom: 1px;
+			content: '';
+			height: 30px;
+			position: absolute;
+			right: 0;
+			transform-origin: bottom;
+			width: 3px;
+			-moz-transform: rotate(-45deg);
+			-ms-transform: rotate(-45deg);
+			-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+
+			background-color: red;
+		}
+
+		.cursor-arrow.is-top {
+			-webkit-transform: rotate(190deg);
+			transform: rotate(190deg);
+		}
+
+		.cursor-arrow.down {
+			transform: rotate(190deg) scale(0.8);
+		}
+
+
+
+
+		@-webkit-keyframes bounce {
+			30% {
+				-webkit-transform: rotate(190deg) scale(1) translate(0.5em, 0.5em);
+				        transform: rotate(190deg) scale(1) translate(0.5em, 0.5em);
+			}
+			40% {
+				-webkit-transform: rotate(190deg) scale(1) translate(0, 0);
+				        transform: rotate(190deg) scale(1) translate(0, 0);
+			}
+			50% {
+				-webkit-transform: rotate(190deg) scale(1) translate(0.25em, 0.25em);
+				        transform: rotate(190deg) scale(1) translate(0.25em, 0.25em);
+			}
+			60%,
+				100% {
+				-webkit-transform: rotate(190deg) scale(1) translate(0, 0);
+				        transform: rotate(190deg) scale(1) translate(0, 0);
+			}
+		}
