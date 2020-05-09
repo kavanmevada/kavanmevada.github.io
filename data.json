@@ -15,7 +15,7 @@
 	{
 		"title": "Emergent Tool Use from Multi-Agent Interaction",
 		"thumb": "https://cdn.openai.com/research-covers/emergent-tool-use/2x-no-mark.jpg",
-		"date": "SEPTEMBER 17, 2019",
+		"date": "SEPT 17, 2019",
 		"description": "We’ve observed agents discovering progressively more complex tool use while playing a simple game of hide-and-seek. Through training in our new simulated hide-and-seek environment, agents build a series of six distinct strategies and counterstrategies, some of which we did not know our environment supported. The self-supervised emergent complexity in this simple environment further suggests that multi-agent co-adaptation may one day produce extremely complex and intelligent behavior.",
 		"data": {
 			"paragraph-0": "Algorithmic efficiency can be defined as reducing the compute needed to train a specific capability. Efﬁciency is the primary way we measure algorithmic progress on classic computer science problems like sorting. Efficiency gains on traditional problems like sorting are more straightforward to measure than in ML because they have a clearer measure of task difficulty. In the sorting example, the “difficulty” of the problem is the length of the list. The cost for quicksort, a commonly used algorithm is denoted in Big O notation: O(nlog{}n)O(nlogn). However, we can apply the efficiency lens to machine learning by holding performance constant. Efficiency trends can be compared across domains like DNA sequencing17 (10-month doubling), solar energy18 (6-year doubling), and transistor density3 (2-year doubling).",
