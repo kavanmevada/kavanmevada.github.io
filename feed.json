@@ -16,6 +16,6 @@
 		"txt4": "After some time I committed almost 10-12 commits. I forgot to explain what I did, I was contributing to the Sound Recorder app. It was coded long ago with an old code base and the whole UI part was hardcoded. I cleaned lots of code and implemented all widgets to glade UI files. Which was essential to making future changes in application UI. I also cleaned all the code and updated old implementations. All of these done before I selected into GSOC.",
 		"txt6": "I'm ending blog here, There's a lot more to explore on this planet.",
 		"txt7": "I'm not sure whats I'm gonna write in the next blog. Is it development blog or general talking, God knows.",
-		"txt8": "Big thanks to my mentors Bilal Elmoussaoui and Felipe Borges. Always available when I needed to help me and guide me."
+		"txt8": "Big thanks to my mentors Bilal Elmoussaoui and Felipe Borges, always available when I needed them."
 	}
 }]
