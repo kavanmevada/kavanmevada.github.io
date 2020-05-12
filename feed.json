@@ -1,10 +1,9 @@
 [{
-            "title": "Greetings, Earthlings",
-            "date": "May 7, 2020",
-            "thumb": "https://i.pinimg.com/originals/9f/c2/12/9fc2126eec2c0a3876e3f2097af9b983.gif",
-            "data": {
- 	      "txt-0": "Finally, I'm writing it. I feel there is a lot to say, but not wanna say everything in one. I made this site for everything, anything sometimes technical sometime not. Basically, I'm starting with myself. I have lots of interest in lots of things, I even don't know why, but anything related to science or tech, I can't hold myself away from it. This describes why I'm into computers. Long story short, I do software development. I love open source community lot (I will explain it later). Right now I'm doing Google Summer of Code with GNOME organization.",
-	      "txt-1": "Finally Finished first little blog, phew. Next some blogs gonna be about GNOME journey."
-            }
-         }
-      ]
+	"title": "Greetings, Earthlings",
+        "date": "May 7, 2020",
+        "thumb": "https://i.pinimg.com/originals/9f/c2/12/9fc2126eec2c0a3876e3f2097af9b983.gif",
+        "data": {
+ 		"txt0": "Finally, I'm writing it. I feel there is a lot to say, but not wanna say everything in one. I made this site for everything, anything sometimes technical sometime not. Basically, I'm starting with myself. I have lots of interest in lots of things, I even don't know why, but anything related to science or tech, I can't hold myself away from it. This describes why I'm into computers. Long story short, I do software development. I love open source community lot (I will explain it later). Right now I'm doing Google Summer of Code with GNOME organization.",
+		"txt1": "Finally Finished first little blog, phew. Next some blogs gonna be about GNOME journey."
+        }
+}]
