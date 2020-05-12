@@ -1,6 +1,7 @@
 [{
 	"title": "Greetings, Earthlings",
 	"date": "Thu, 07 May 2020 00:30:00 EST",
+	"feed": false,
 	"data": {
 		"txt0": "Finally, I'm writing it. I feel there is a lot to say, but not wanna say everything in one. I made this site for everything, anything sometimes technical sometimes not. I'm starting with myself. I have lots of interest in lots of things, I even don't know why, but anything related to science or tech, I can't hold myself away from it. This describes why I'm into computers. Long story short, I do software development. I love open source community lot (I will explain it later). Right now I'm doing Google Summer of Code with GNOME organization.",
 		"txt1": "Finally Finished first little blog, phew. Next, some blogs gonna be about GNOME journey."
@@ -8,6 +9,7 @@
 }, {
 	"title": "Finally Landed on Planet GNOME",
 	"date": "Tue, 12 May 2020 00:30:00 EST",
+	"feed": true,
 	"data": {
 		"txt0": "Hi to the people of planet GNOME! 🌎",
 		"txt1": "Should I start with a deep introduction? Not sure! Okay, let me start from my first time with Linux. I installed my first Linux when I was around 17, It was OpenSUSE. I just burned iso and booted, HAHAHA It was a magnetic disk era. After some years I was getting deep into Linux. I consider Linux as an Icecream. Lots of flavors to eat. Eat whatever you like. Or make your own flavor. 4-5 years ago I was jumping over multiple distros. I tried multiple linux distros. But now I'm settled on a custom build Debian distro. My first encounter with GNOME was on Fedora. I still love Fedora. But Debian is ultra-fast with only selected packages and easy to make its flavor. This is my short Linux story.",
