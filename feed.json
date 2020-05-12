@@ -11,8 +11,8 @@
 	"data": {
 		"txt0": "Hi to the people of planet GNOME!",
 		"txt1": "Should I start with deep introduction ? Not sure! Okey let me start from my first time with Linux. I installed my first linux when I was around 17, It was openSUS. I just burned iso and booted, HAHAHA It was megnetic disk era. I think that time. After some years I was getting deep into linux. After some years tried multiple distros. I consider Linux as a Icecream. Lots of flavours eat whatever you like. Or make own. 4-5 years ago I was jumping over multiple distros but now I'm setteled on custom build debian distro. My first encounterd with GNOME was on Fedora. I still love Fedora. But Debian is ultra fast with only selected packages and easy to make own flavour. This is my short linux story.",
-		"txt2": "This year I'm selected into GSOC. Yay. well fun part is It's GNOME. I applied in only one Org. from list, cause It was GNOME or nothing."
-		"txt3": "I was connected to one of my mentor month before GSOC start. He told me to fix some newcomers issues on gitlab. That was my first contribution into GNOME."
+		"txt2": "This year I'm selected into GSOC. Yay. well fun part is It's GNOME. I applied in only one Org. from list, cause It was GNOME or nothing.",
+		"txt3": "I was connected to one of my mentor month before GSOC start. He told me to fix some newcomers issues on gitlab. That was my first contribution into GNOME.",
 		"txt4": "After some time I commited almost 10-12 commits. I forgot to explain what I did, I was contibuting to Sound Recorder app. It was coded lot earlier with old code base and whole UI part was hard coded. I clead lots of code and implemented all widgets to glade ui files. Which was essential to make future changes in application UI. I also cleaned all the code and updated old implementations. All of these done before I selected into GSOC",
 		"txt5": "All thanks to constant chat with mentors, lol lamost everyday. In two months I chatted with many GNOME people, All are cool and nice to me.",
 		"txt6": "I'm ending blog here, There's lot more to explore on this planet.",
