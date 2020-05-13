@@ -8,6 +8,7 @@ After some time I committed almost 10-12 commits. I forgot to explain what I did
 I'm ending blog here, There's a lot more to explore on this planet.
 I'm not sure whats I'm gonna write in the next blog. Is it development blog or general talking, God knows.
 Big thanks to my mentors Bilal Elmoussaoui and Felipe Borges, always available when I needed them.
+
 ```language-js
 ws.getMonkeys(race, type, callback);
 ```
