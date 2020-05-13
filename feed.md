@@ -1,3 +1,4 @@
+<sub>Tue, 12 May 2020</sub>
 #Finally Landed on Planet GNOME
 Hi to the people of planet GNOME! 🌎
 Should I start with a deep introduction? Not sure! Okay, let me start from my first time with Linux. I installed my first Linux when I was around 17, It was OpenSUSE. I just burned iso and booted, HAHAHA It was a magnetic disk era. After some years I was getting deep into Linux. I consider Linux as an Icecream. Lots of flavors to eat. Eat whatever you like. Or make your own flavor. 4-5 years ago I was jumping over multiple distros. I tried multiple linux distros. But now I'm settled on a custom build Debian distro. My first encounter with GNOME was on Fedora. I still love Fedora. But Debian is ultra-fast with only selected packages and easy to make its flavor. This is my short Linux story.
